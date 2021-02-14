@@ -1,0 +1,21 @@
+
+
+.darkSquare {
+  background-color: darkslategrey;
+  border: solid;
+  height: 100;
+  width: 100;
+}
+
+.whiteSquare {
+  background-color: floralwhite;
+  border: solid;
+  height: 100;
+  width: 100;
+}
+
+#A8 {
+  position: fixed;
+  top: vh;
+  left: 0;
+}
