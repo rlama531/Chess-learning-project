@@ -1,21 +1,53 @@
+html {
+  scroll-behavior: smooth;
+}
 
+.chessBoard {
+  position: fixed;
+  left: 10;
+  top: 10;
+
+}
+table tr {
+  height: 9vh
+}
+
+table td {
+  width: 9vh
+}
+
+@media only screen and (min-height: 100vw) {
+  table tr {
+    height: 9vw;
+  }
+  table td {
+    width: 9vw;
+  }
+}
 
 .darkSquare {
   background-color: darkslategrey;
   border: solid;
-  height: 100;
-  width: 100;
 }
 
 .whiteSquare {
   background-color: floralwhite;
   border: solid;
-  height: 100;
-  width: 100;
 }
 
-#A8 {
-  position: fixed;
-  top: vh;
-  left: 0;
+.columnFooter {
+  background-color: white;
+  border-color: white;
+  font-size: 12px; /* Will need to be adjusted to adjust with different screen size*/
+  font-family: Verdana, sans-serif;
+  text-align: center;
+  vertical-align: text-top;
+}
+
+.rowHeader {
+  background-color: white;
+  border-color: white;
+  font-size: 12px; /* Will need to be adjusted to adjust with different screen size*/
+  font-family: Verdana, sans-serif;
+  text-align: right;
 }
