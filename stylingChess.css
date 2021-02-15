@@ -4,9 +4,8 @@ html {
 
 .chessBoard {
   position: fixed;
-  left: 10;
-  top: 10;
-
+  left: 0;
+  top: 100;
 }
 table tr {
   height: 9vh
