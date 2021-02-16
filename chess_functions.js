@@ -47,14 +47,16 @@ var currentSetOfPieces; //this variable will adjust depending on who's turn it i
 
 function createSquareListeners() {
   for (let i=0; i < allSquares.length; i++) {
-    allSquares[i].addEventListener("dblclick", highlightSquare);
-    allSquares[i].addEventListener("dblclick", highlightSquare);
+    allSquares[i].addEventListener("click", highlightSquare);
+    allSquares[i].addEventListener("click", highlightSquare);
   }
 }
 
 function highlightSquare() {
-  let selectedSquareIndex = getSelectedSquareId();
-  let selectedSquareClass = getSelectedSquareClass();
+  let selectedSquareId = event.target.id;
+  let selectedSquareIndex = chessBoard.indexOf(selectedSquareId);  // CURRENT ISSUE IS TRYING TO HIGHLIGHT SQUAURE AND CLICK PIECE
+  let selectedSquareClass = event.target.className;
+
   for (let i = 0; i<chessBoardObject.length; i++) {
     if (chessBoardObject[i].isHighlighted) {
       chessBoardObject[i].classType == 'whiteSquare' ? allSquares[i].style.backgroundColor = 'floralwhite' : allSquares[i].style.backgroundColor = 'darkslategrey';
