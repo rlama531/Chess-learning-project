@@ -55,11 +55,13 @@ function createSquareListeners() {
 function highlightSquare() {
   let selectedSquareIndex = getSelectedSquareId();
   let selectedSquareClass = getSelectedSquareClass();
-  let anyOtherSquaresHighlighted = false;
   for (let i = 0; i<chessBoardObject.length; i++) {
     if (chessBoardObject[i].isHighlighted) {
       chessBoardObject[i].classType == 'whiteSquare' ? allSquares[i].style.backgroundColor = 'floralwhite' : chessBoardObject[i].classType == 'darkSquare' ? allSquares[i].style.backgroundColor = 'darkslategrey' : allSquares[i].style.backgroundColor = 'white';
       chessBoardObject[i].isHighlighted = false;
+      if (i == selectedSquareIndex) {
+        return;
+      }
     }
   }
   if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedSquareClass == 'whiteSquare') {
@@ -68,14 +70,13 @@ function highlightSquare() {
   } else if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedSquareClass == 'darkSquare') {
       allSquares[selectedSquareIndex].style.backgroundColor = 'darkslategrey';
       chessBoardObject[selectedSquareIndex].isHighlighted = false;
+  } else if (selectedSquareClass == 'whiteSquare'){
+    allSquares[selectedSquareIndex].style.backgroundColor = 'ffffa8';
+    chessBoardObject[selectedSquareIndex].isHighlighted = true;
   } else {
-    allSquares[selectedSquareIndex].style.backgroundColor = 'EEBFBF';
+    allSquares[selectedSquareIndex].style.backgroundColor = 'af8B08';
     chessBoardObject[selectedSquareIndex].isHighlighted = true;
   }
-}
-
-function removeSquareHighlight(selectedSquare) {
-
 }
 
 function getSelectedSquareId() {
