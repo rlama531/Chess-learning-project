@@ -17,7 +17,7 @@ const chessBoardClasses = ['rowHeader','darkSquare','whiteSquare','darkSquare','
                            'rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
                            'rowHeader','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare',
                            'rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
-                           'rowHeader','rowHeader','rowHeader','rowHeader','rowHeader','rowHeader','rowHeader','rowHeader','rowHeader'];
+                           'rowHeader','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter'];
 
 const piecesLocation = [['blackARook', 'blackBKnight','blackCBishop','blackQueen','blackKing','blackFBishop','blackGKnight','blackHRook'],
                         ['blackAPawn','blackBPawn','blackCPawn','blackDPawn','blackEPawn','blackFPawn','blackGPawn','blackHPawn'],
@@ -57,7 +57,7 @@ function highlightSquare() {
   let selectedSquareClass = getSelectedSquareClass();
   for (let i = 0; i<chessBoardObject.length; i++) {
     if (chessBoardObject[i].isHighlighted) {
-      chessBoardObject[i].classType == 'whiteSquare' ? allSquares[i].style.backgroundColor = 'floralwhite' : chessBoardObject[i].classType == 'darkSquare' ? allSquares[i].style.backgroundColor = 'darkslategrey' : allSquares[i].style.backgroundColor = 'white';
+      chessBoardObject[i].classType == 'whiteSquare' ? allSquares[i].style.backgroundColor = 'floralwhite' : allSquares[i].style.backgroundColor = 'darkslategrey';
       chessBoardObject[i].isHighlighted = false;
       if (i == selectedSquareIndex) {
         return;
@@ -73,8 +73,8 @@ function highlightSquare() {
   } else if (selectedSquareClass == 'whiteSquare'){
     allSquares[selectedSquareIndex].style.backgroundColor = 'ffffa8';
     chessBoardObject[selectedSquareIndex].isHighlighted = true;
-  } else {
-    allSquares[selectedSquareIndex].style.backgroundColor = 'af8B08';
+  } else if (selectedSquareClass == 'darkSquare'){
+    allSquares[selectedSquareIndex].style.backgroundColor = '748A6D';
     chessBoardObject[selectedSquareIndex].isHighlighted = true;
   }
 }
