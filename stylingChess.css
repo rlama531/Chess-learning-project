@@ -50,3 +50,8 @@ table td {
   font-family: Verdana, sans-serif;
   text-align: right;
 }
+
+td {
+  text-align: center;
+  vertical-align: center;
+}
