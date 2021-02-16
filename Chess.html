@@ -2,14 +2,15 @@
 <head>
   <title> Chess Project </title>
   <link rel="stylesheet"type="text/css"href="./stylingChess.css"/>
+  <script src="chess_functions.js"> </script>
 </head>
 
 <body>
   <table class="chessBoard">
     <tr>
-      <td class="rowHeader" id="8">8</td>
+      <td class="rowHeader" id="R8">8</td>
       <td class="darkSquare" id="A8"> </td>
-      <td class="whiteSquare" id="B8"> </td>
+      <td class="whiteSquare" id="B8"></td>
       <td class="darkSquare" id="C8"> </td>
       <td class="whiteSquare" id="D8"> </td>
       <td class="darkSquare" id="E8"> </td>
@@ -18,7 +19,7 @@
       <td class="whiteSquare" id="H8"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="7">7</td>
+      <td class="rowHeader" id="R7">7</td>
       <td class="whiteSquare" id="A7"> </td>
       <td class="darkSquare" id="B7"> </td>
       <td class="whiteSquare" id="C7"> </td>
@@ -29,7 +30,7 @@
       <td class="darkSquare" id="H7"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="6">6</td>
+      <td class="rowHeader" id="R6">6</td>
       <td class="darkSquare" id="A6"> </td>
       <td class="whiteSquare" id="B6"> </td>
       <td class="darkSquare" id="C6"> </td>
@@ -40,7 +41,7 @@
       <td class="whiteSquare" id="H6"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="5">5</td>
+      <td class="rowHeader" id="R5">5</td>
       <td class="whiteSquare" id="A5"> </td>
       <td class="darkSquare" id="B5"> </td>
       <td class="whiteSquare" id="C5"> </td>
@@ -51,7 +52,7 @@
       <td class="darkSquare" id="H5"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="4">4</td>
+      <td class="rowHeader" id="R4">4</td>
       <td class="darkSquare" id="A4"> </td>
       <td class="whiteSquare" id="B4"> </td>
       <td class="darkSquare" id="C4"> </td>
@@ -62,7 +63,7 @@
       <td class="whiteSquare" id="H4"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="3">3</td>
+      <td class="rowHeader" id="R3">3</td>
       <td class="whiteSquare" id="A3"> </td>
       <td class="darkSquare" id="B3"> </td>
       <td class="whiteSquare" id="C3"> </td>
@@ -73,7 +74,7 @@
       <td class="darkSquare" id="H3"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="2">2</td>
+      <td class="rowHeader" id="R2">2</td>
       <td class="darkSquare" id="A2"> </td>
       <td class="whiteSquare" id="B2"> </td>
       <td class="darkSquare" id="C2"> </td>
@@ -84,7 +85,7 @@
       <td class="whiteSquare" id="H2"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="1">1</td>
+      <td class="rowHeader" id="R1">1</td>
       <td class="whiteSquare" id="A1"> </td>
       <td class="darkSquare" id="B1"> </td>
       <td class="whiteSquare" id="C1"> </td>
@@ -95,15 +96,17 @@
       <td class="darkSquare" id="H1"> </td>
     </tr>
     <tr>
-      <td class="rowHeader" id="placeHolderBottomRight"> </td>
-      <td class="columnFooter" id="A">A</td>
-      <td class="columnFooter" id="B">B</td>
-      <td class="columnFooter" id="C">C</td>
-      <td class="columnFooter" id="D">D</td>
-      <td class="columnFooter" id="E">E</td>
-      <td class="columnFooter" id="F">F</td>
-      <td class="columnFooter" id="G">G</td>
-      <td class="columnFooter" id="H">H</td>
+      <td class="rowHeader" id="R0"> </td>
+      <td class="columnFooter" id="A0">A</td>
+      <td class="columnFooter" id="B0">B</td>
+      <td class="columnFooter" id="C0">C</td>
+      <td class="columnFooter" id="D0">D</td>
+      <td class="columnFooter" id="E0">E</td>
+      <td class="columnFooter" id="F0">F</td>
+      <td class="columnFooter" id="G0">G</td>
+      <td class="columnFooter" id="H0">H</td>
     </tr>
   </chess-board>
+
+  <button ondblclick="startUp()"> double click to start </button>
 </body>
