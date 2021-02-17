@@ -111,6 +111,7 @@ function highlightSquare() {
 }
 
 function movingPieces() {
+  highlightSquare();
   let selectedPiece = event.target.id;
   //to be continued
 }
