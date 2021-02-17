@@ -19,14 +19,14 @@ const chessBoardClasses = ['rowHeader','darkSquare','whiteSquare','darkSquare','
                            'rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
                            'rowHeader','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter'];
 
-const piecesLocation = [['blackARook', 'blackBKnight','blackCBishop','blackQueen','blackKing','blackFBishop','blackGKnight','blackHRook'],
-                        ['blackAPawn','blackBPawn','blackCPawn','blackDPawn','blackEPawn','blackFPawn','blackGPawn','blackHPawn'],
-                        [null, null, null, null, null, null, null, null],
-                        [null, null, null, null, null, null, null, null],
-                        [null, null, null, null, null, null, null, null],
-                        [null, null, null, null, null, null, null, null],
-                        ['whiteAPawn','whiteBPawn','whiteCPawn','whiteDPawn','whiteEPawn','whiteFPawn','whiteGPawn','whiteHPawn'],
-                        ['whiteARook', 'whiteBKnight','whiteCBishop','whiteQueen','whiteKing','whiteFBishop','whiteGKnight','whiteHRook']]
+const piecesLocation = [null,'blackARook', 'blackBKnight','blackCBishop','blackQueen','blackKing','blackFBishop','blackGKnight','blackHRook',
+                        null,'blackAPawn','blackBPawn','blackCPawn','blackDPawn','blackEPawn','blackFPawn','blackGPawn','blackHPawn',
+                        null,null, null, null, null, null, null, null, null,
+                        null,null, null, null, null, null, null, null, null,
+                        null,null, null, null, null, null, null, null, null,
+                        null,null, null, null, null, null, null, null, null,
+                        null,'whiteAPawn','whiteBPawn','whiteCPawn','whiteDPawn','whiteEPawn','whiteFPawn','whiteGPawn','whiteHPawn',
+                        null,'whiteARook', 'whiteBKnight','whiteCBishop','whiteQueen','whiteKing','whiteFBishop','whiteGKnight','whiteHRook']
 
 var chessBoardObject = [];
 for (let i=0; i<chessBoard.length; i++) {
@@ -53,10 +53,14 @@ function createSquareListeners() {
 }
 
 function highlightSquare() {
-  let selectedSquareId = event.target.id;
-  let selectedSquareIndex = chessBoard.indexOf(selectedSquareId);  // CURRENT ISSUE IS TRYING TO HIGHLIGHT SQUAURE AND CLICK PIECE
-  let selectedSquareClass = event.target.className;
-
+  let selectedId = event.target.id;
+  let selectedClass = event.target.className;
+  let selectedSquareIndex = chessBoard.indexOf(selectedId);  // CURRENT ISSUE IS TRYING TO HIGHLIGHT SQUAURE AND CLICK PIECE
+  if (selectedClass != 'whiteSquare' && selectedClass != 'darkSquare') {
+    selectedSquareIndex = piecesLocation.indexOf(selectedId);
+    selectedClass = chessBoardClasses[selectedSquareIndex];
+    selectedId = chessBoard[selectedSquareIndex]
+  }
   for (let i = 0; i<chessBoardObject.length; i++) {
     if (chessBoardObject[i].isHighlighted) {
       chessBoardObject[i].classType == 'whiteSquare' ? allSquares[i].style.backgroundColor = 'floralwhite' : allSquares[i].style.backgroundColor = 'darkslategrey';
@@ -66,29 +70,36 @@ function highlightSquare() {
       }
     }
   }
-  if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedSquareClass == 'whiteSquare') {
+  if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedClass == 'whiteSquare') {
     allSquares[selectedSquareIndex].style.backgroundColor = 'floralwhite';
     chessBoardObject[selectedSquareIndex].isHighlighted = false;
-  } else if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedSquareClass == 'darkSquare') {
+  } else if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedClass == 'darkSquare') {
       allSquares[selectedSquareIndex].style.backgroundColor = 'darkslategrey';
       chessBoardObject[selectedSquareIndex].isHighlighted = false;
-  } else if (selectedSquareClass == 'whiteSquare'){
+  } else if (selectedClass == 'whiteSquare'){
     allSquares[selectedSquareIndex].style.backgroundColor = 'ffffa8';
     chessBoardObject[selectedSquareIndex].isHighlighted = true;
-  } else if (selectedSquareClass == 'darkSquare'){
+  } else if (selectedClass == 'darkSquare'){
     allSquares[selectedSquareIndex].style.backgroundColor = '748A6D';
     chessBoardObject[selectedSquareIndex].isHighlighted = true;
   }
 }
 
-function getSelectedSquareId() {
-  let selectedSquareId = event.target.id
-  return chessBoard.indexOf(selectedSquareId)
+function getselectedId() {
+  let selectedId = event.target.id
+  return chessBoard.indexOf(selectedId)
 }
 
-function getSelectedSquareClass() {
-  let selectedSquareClass = event.target.className
-  return selectedSquareClass;
+function getselectedClass() {
+  let selectedClass = event.target.className
+  return selectedClass;
+}
+
+function findCurrentPieceLocation(id) {
+
+  console.log(currentPosition)
+  let location = chessBoard.indexOf(piecesLocation[currentPosition]);
+  return location;
 }
 
 createSquareListeners();
