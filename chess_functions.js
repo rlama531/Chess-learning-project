@@ -9,14 +9,14 @@ const chessBoard = ['R8','A8','B8','C8','D8','E8','F8','G8','H8',
                     'R1','A1','B1','C1','D1','E1','F1','G1','H1',
                     'R0','A0','B0','C0','D0','E0','F0','G0','H0'];
 
-const chessBoardClasses = ['rowHeader','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare',
-                           'rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
+const chessBoardClasses = ['rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
                            'rowHeader','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare',
                            'rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
                            'rowHeader','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare',
                            'rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
                            'rowHeader','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare',
                            'rowHeader','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare',
+                           'rowHeader','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare',
                            'rowHeader','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter'];
 
 const piecesLocation = [null,'blackARook', 'blackBKnight','blackCBishop','blackQueen','blackKing','blackFBishop','blackGKnight','blackHRook',
@@ -135,9 +135,25 @@ function dragoverHandler() {
 function dropHandler(ev) {
   event.preventDefault();
   var id = event.dataTransfer.getData("piece");
-  event.target.appendChild(document.getElementById(id));
-  highlightSquare()
+  var target = event.target;
+  var squareTarget = target;
+  if (target.className != 'whiteSquare' && target.className != 'darkSquare') {
+    squareTarget = target.parentElement;
+    console.log(squareTarget)
+  }
+  if (isMoveAllowed(target)) {
+    if (squareTarget.hasChildNodes()) {
+      squareTarget.removeChild(squareTarget.firstElementChild);
+    }
+    squareTarget.appendChild(document.getElementById(id));
+    highlightSquare()
+  } else {
+
+  }
 }
 
+function isMoveAllowed() {
+  return true; //true for right now for testing
+}
 
 createSquareListeners();
