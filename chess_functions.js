@@ -28,27 +28,52 @@ const piecesLocation = [null,'blackARook', 'blackBKnight','blackCBishop','blackQ
                         null,'whiteAPawn','whiteBPawn','whiteCPawn','whiteDPawn','whiteEPawn','whiteFPawn','whiteGPawn','whiteHPawn',
                         null,'whiteARook', 'whiteBKnight','whiteCBishop','whiteQueen','whiteKing','whiteFBishop','whiteGKnight','whiteHRook']
 
-var chessBoardObject = [];
+const blackPieces = ['blackAPawn','blackBPawn','blackCPawn','blackDPawn','blackEPawn','blackFPawn','blackGPawn','blackHPawn','blackARook', 'blackBKnight','blackCBishop','blackQueen','blackKing','blackFBishop','blackGKnight','blackHRook']
+const whitePieces = ['whiteAPawn','whiteBPawn','whiteCPawn','whiteDPawn','whiteEPawn','whiteFPawn','whiteGPawn','whiteHPawn','whiteARook', 'whiteBKnight','whiteCBishop','whiteQueen','whiteKing','whiteFBishop','whiteGKnight','whiteHRook']
+
+var chessBoardObjects = [];
 for (let i=0; i<chessBoard.length; i++) {
-  chessBoardObject[i] = {
+  chessBoardObjects[i] = {
     name: chessBoard[i],
     classType: chessBoardClasses[i],
     isHighlighted: false,
   }
 }
 
+var blackPiecesObjects = [];
+for (let i=0; i<blackPieces.length; i++) {
+  blackPiecesObjects[i] = {
+    name: blackPieces[i],
+    element: document.getElementById(whitePieces[i]),
+    currLocation: piecesLocation.indexOf(blackPieces[i]),
+    onBoard: true,
+    type: document.getElementById(blackPieces[i]).className,
+  }
+}
+
+var whitePiecesObjects = [];
+for (let i=0; i<whitePieces.length; i++) {
+  whitePiecesObjects[i] = {
+    name: whitePieces[i],
+    element: document.getElementById(whitePieces[i]),
+    currLocation: piecesLocation.indexOf(whitePieces[i]),
+    onBoard: true,
+    type: document.getElementById(whitePieces[i]).className,
+  }
+}
+
 const allSquares = document.querySelectorAll('td') //includes row references
-var blackPieces = document.querySelectorAll('blackPiece') //all black pieces
-var whitePieces = document.querySelectorAll('whitePiece') //all white pieces
 
 var whiteTurn = true;
-var currentSetOfPieces; //this variable will adjust depending on who's turn it is
-
 
 function createSquareListeners() {
   for (let i=0; i < allSquares.length; i++) {
     allSquares[i].addEventListener("click", highlightSquare);
-    allSquares[i].addEventListener("click", highlightSquare);
+  }
+  for(let i=0; i<blackPiecesObjects.length; i++){
+    whitePiecesObjects[i].element.addEventListener("dragstart", movingPieces)
+    // use 'drop' later whitePiecesObjects[i].element.addEventListener("drop", )
+    blackPiecesObjects[i].element.addEventListener("dragstart", movingPieces)
   }
 }
 
@@ -56,50 +81,40 @@ function highlightSquare() {
   let selectedId = event.target.id;
   let selectedClass = event.target.className;
   let selectedSquareIndex = chessBoard.indexOf(selectedId);  // CURRENT ISSUE IS TRYING TO HIGHLIGHT SQUAURE AND CLICK PIECE
-  if (selectedClass != 'whiteSquare' && selectedClass != 'darkSquare') {
-    selectedSquareIndex = piecesLocation.indexOf(selectedId);
+  if (selectedClass != 'whiteSquare' && selectedClass != 'darkSquare' && selectedClass != 'rowHeader' && selectedClass != 'columnFooter') {
+    selectedSquareIndex = piecesLocation.indexOf(selectedId)
     selectedClass = chessBoardClasses[selectedSquareIndex];
     selectedId = chessBoard[selectedSquareIndex]
   }
-  for (let i = 0; i<chessBoardObject.length; i++) {
-    if (chessBoardObject[i].isHighlighted) {
-      chessBoardObject[i].classType == 'whiteSquare' ? allSquares[i].style.backgroundColor = 'floralwhite' : allSquares[i].style.backgroundColor = 'darkslategrey';
-      chessBoardObject[i].isHighlighted = false;
+  for (let i = 0; i<chessBoardObjects.length; i++) {
+    if (chessBoardObjects[i].isHighlighted) {
+      chessBoardObjects[i].classType == 'whiteSquare' ? allSquares[i].style.backgroundColor = 'floralwhite' : allSquares[i].style.backgroundColor = 'darkslategrey';
+      chessBoardObjects[i].isHighlighted = false;
       if (i == selectedSquareIndex) {
         return;
       }
     }
   }
-  if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedClass == 'whiteSquare') {
+  if (chessBoardObjects[selectedSquareIndex].isHighlighted && selectedClass == 'whiteSquare') {
     allSquares[selectedSquareIndex].style.backgroundColor = 'floralwhite';
-    chessBoardObject[selectedSquareIndex].isHighlighted = false;
-  } else if (chessBoardObject[selectedSquareIndex].isHighlighted && selectedClass == 'darkSquare') {
+    chessBoardObjects[selectedSquareIndex].isHighlighted = false;
+  } else if (chessBoardObjects[selectedSquareIndex].isHighlighted && selectedClass == 'darkSquare') {
       allSquares[selectedSquareIndex].style.backgroundColor = 'darkslategrey';
-      chessBoardObject[selectedSquareIndex].isHighlighted = false;
+      chessBoardObjects[selectedSquareIndex].isHighlighted = false;
   } else if (selectedClass == 'whiteSquare'){
     allSquares[selectedSquareIndex].style.backgroundColor = 'ffffa8';
-    chessBoardObject[selectedSquareIndex].isHighlighted = true;
+    chessBoardObjects[selectedSquareIndex].isHighlighted = true;
   } else if (selectedClass == 'darkSquare'){
     allSquares[selectedSquareIndex].style.backgroundColor = '748A6D';
-    chessBoardObject[selectedSquareIndex].isHighlighted = true;
+    chessBoardObjects[selectedSquareIndex].isHighlighted = true;
   }
 }
 
-function getselectedId() {
-  let selectedId = event.target.id
-  return chessBoard.indexOf(selectedId)
+function movingPieces() {
+  let selectedPiece = event.target.id;
+  //to be continued
 }
 
-function getselectedClass() {
-  let selectedClass = event.target.className
-  return selectedClass;
-}
 
-function findCurrentPieceLocation(id) {
-
-  console.log(currentPosition)
-  let location = chessBoard.indexOf(piecesLocation[currentPosition]);
-  return location;
-}
 
 createSquareListeners();
