@@ -44,7 +44,7 @@ var blackPiecesObjects = [];
 for (let i=0; i<blackPieces.length; i++) {
   blackPiecesObjects[i] = {
     name: blackPieces[i],
-    element: document.getElementById(whitePieces[i]),
+    element: document.getElementById(blackPieces[i]),
     currLocation: piecesLocation.indexOf(blackPieces[i]),
     onBoard: true,
     type: document.getElementById(blackPieces[i]).className,
@@ -69,11 +69,18 @@ var whiteTurn = true;
 function createSquareListeners() {
   for (let i=0; i < allSquares.length; i++) {
     allSquares[i].addEventListener("click", highlightSquare);
+    if (allSquares[i].className != "rowHeader" && allSquares[i].className != "columnFooter") {
+      allSquares[i].addEventListener("dragover", dragoverHandler);
+      allSquares[i].addEventListener("drop", dropHandler);
+    }
   }
   for(let i=0; i<blackPiecesObjects.length; i++){
-    whitePiecesObjects[i].element.addEventListener("dragstart", movingPieces)
+    whitePiecesObjects[i].element.addEventListener("dragstart", dragstartHandler);
+    whitePiecesObjects[i].element.addEventListener("dragend", dragendHandler);
     // use 'drop' later whitePiecesObjects[i].element.addEventListener("drop", )
-    blackPiecesObjects[i].element.addEventListener("dragstart", movingPieces)
+    blackPiecesObjects[i].element.addEventListener("dragstart", dragstartHandler);
+    blackPiecesObjects[i].element.addEventListener("dragend", dragendHandler);
+
   }
 }
 
@@ -110,12 +117,27 @@ function highlightSquare() {
   }
 }
 
-function movingPieces() {
+function dragstartHandler() {
   highlightSquare();
   let selectedPiece = event.target.id;
-  //to be continued
+  event.dataTransfer.setData("piece", event.target.id);
+  event.effectAllowed = "move";
 }
 
+function dragendHandler() {
+  event.dataTransfer.clearData();
+}
+
+function dragoverHandler() {
+  event.preventDefault();
+}
+
+function dropHandler(ev) {
+  event.preventDefault();
+  var id = event.dataTransfer.getData("piece");
+  event.target.appendChild(document.getElementById(id));
+  highlightSquare()
+}
 
 
 createSquareListeners();
