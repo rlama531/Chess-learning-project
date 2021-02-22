@@ -141,7 +141,7 @@ function dropHandler(ev) {
     squareTarget = target.parentElement;
     console.log(squareTarget)
   }
-  if (isMoveAllowed(target)) {
+  if (isMoveAllowed(target, id)) {
     if (squareTarget.hasChildNodes()) {
       squareTarget.removeChild(squareTarget.firstElementChild);
     }
