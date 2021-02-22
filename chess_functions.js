@@ -142,18 +142,38 @@ function dropHandler(ev) {
     console.log(squareTarget)
   }
   if (isMoveAllowed(target, id)) {
+    updatePieceLocation(target, id);
     if (squareTarget.hasChildNodes()) {
       squareTarget.removeChild(squareTarget.firstElementChild);
     }
     squareTarget.appendChild(document.getElementById(id));
     highlightSquare()
   } else {
-
+      noMoveOccurs();
   }
 }
 
 function isMoveAllowed() {
   return true; //true for right now for testing
 }
+
+function updatePieceLocation(square, piece) {
+  let pieceIndex;
+  if (piece.includes('black')) {
+    pieceIndex = blackPieces.indexOf(piece);
+    blackPiecesObjects[pieceIndex].currLocation = square.id
+  } else {
+    pieceIndex = whitePieces.indexOf(piece);
+    whitePiecesObjects[pieceIndex].currLocation = square.id
+  }
+}
+
+
+
+function noMoveOccurs() {
+  return null; //for now, implement later
+
+}
+
 
 createSquareListeners();
