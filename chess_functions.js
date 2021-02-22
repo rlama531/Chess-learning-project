@@ -19,7 +19,7 @@ const chessBoardClasses = ['rowHeader','whiteSquare','darkSquare','whiteSquare',
                            'rowHeader','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare','darkSquare','whiteSquare',
                            'rowHeader','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter','columnFooter'];
 
-const piecesLocation = [null,'blackARook', 'blackBKnight','blackCBishop','blackQueen','blackKing','blackFBishop','blackGKnight','blackHRook',
+var piecesLocation = [null,'blackARook', 'blackBKnight','blackCBishop','blackQueen','blackKing','blackFBishop','blackGKnight','blackHRook',
                         null,'blackAPawn','blackBPawn','blackCPawn','blackDPawn','blackEPawn','blackFPawn','blackGPawn','blackHPawn',
                         null,null, null, null, null, null, null, null, null,
                         null,null, null, null, null, null, null, null, null,
@@ -161,10 +161,14 @@ function updatePieceLocation(square, piece) {
   let pieceIndex;
   if (piece.includes('black')) {
     pieceIndex = blackPieces.indexOf(piece);
-    blackPiecesObjects[pieceIndex].currLocation = square.id
+    blackPiecesObjects[pieceIndex].currLocation = square.id;
+    piecesLocation[piecesLocation.indexOf(piece)] = null;
+    piecesLocation[chessBoard.indexOf(square.id)] = piece;
   } else {
-    pieceIndex = whitePieces.indexOf(piece);
-    whitePiecesObjects[pieceIndex].currLocation = square.id
+      pieceIndex = whitePieces.indexOf(piece);
+      whitePiecesObjects[pieceIndex].currLocation = square.id;
+      piecesLocation[piecesLocation.indexOf(piece)] = null;
+      piecesLocation[chessBoard.indexOf(square.id)] = piece;
   }
 }
 
